@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delete Item</title>
+    <link rel="stylesheet" th:href="@{css/general.css}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<form action="/delname" method="post">
+    <table>
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Cost ($)</th>
+            <th>Uncheked items will be removed:</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="c : ${sb.getCart()}" >
+
+            <td>
+                <label for="item">Item: </label>
+                <input type="text" id = "item" name = "item" value="item" th:value="${c.getName()}" readonly>
+            </td>
+
+            <td th:text = "'$' + ${c.getCost()}" />
+
+            <td>
+                <label th:for="${c.getName()}"> </label>
+                <input type="checkbox" id ="delete" th:name="${c.getName()}" checked>
+<!--                <input type="hidden" name="delete" value="false" >-->
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+<a th:href="@{/cart}">Go Back</a>
+</body>
+</html>

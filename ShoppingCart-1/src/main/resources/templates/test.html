@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" th:href="@{css/general.css}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h1>Shopping Cart v0.0.0.0.0.0.1</h1>
+
+<a th:href="@{/newname}">Add New Item!</a>
+<br>
+<a th:href="@{/delname}">Delete Item!</a>
+<br>
+<a th:href="@{/updatename}">Update Item!</a>
+
+<a th:href="@{/logout}">Logout</a>
+
+<br><br><br><br>
+<p th:text="'Cart total: $' + ${total}" style="font-size: 2em;">
+
+<form action="/cart" method="post">
+    <table>
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Cost ($)</th>
+            <th>Qty</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="c : ${sb.getCart()}" >
+
+            <td>
+                <label for="name">Item: </label>
+                <input type="text" id = "name" name = "name" value="name" th:value="${c.getName()}" readonly>
+            </td>
+
+            <td>
+                <label for="cost">Cost: </label>
+                <input type="number" min=0 step=0.01 id = "cost" name = "cost" value="cost" th:value="${c.getCost()}" readonly>
+            </td>
+
+            <td>
+                <label for="qty">Qty: </label>
+                <input type="number" min=0 max = 2147483647 id ="qty" name="qty" value="qty" th:value="2">
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+<br/>
+
+
+</body>
+</html>
